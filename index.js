@@ -15,34 +15,30 @@ const TOKEN = process.env.BOT_TOKEN;
 // ID du canal où poster les codes
 const CHANNEL_ID = "1463623618931068949";
 
-// Source automatique des codes (mise à jour par moi)
+// Source automatique des codes
 const CODES_URL = "https://wos-codes-api.vercel.app/codes.json";
 
 let lastPosted = new Set();
 
 async function checkCodes() {
-  try {
-    let codes = [];
+  let codes = [];
 
-try {
+  try {
     const res = await axios.get(CODES_URL);
     codes = res.data;
     console.log("Codes récupérés :", codes);
-} catch (err) {
+  } catch (err) {
     console.error("Erreur récupération codes :", err.message);
 
     if (err.response && err.response.status === 404) {
-        console.log("Aucun code disponible pour le moment.");
-        return;
+      console.log("Aucun code disponible pour le moment.");
+      return;
     }
 
     return;
-}
-      }
-    }
-  } catch (err) {
-    console.error("Erreur récupération codes :", err.message);
   }
+
+  // Ici tu pourras ajouter le code pour publier les codes dans Discord
 }
 
 client.once("ready", () => {
