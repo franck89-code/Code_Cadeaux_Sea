@@ -9,29 +9,20 @@ const client = new Client({
   ]
 });
 
-// Ton token sera ajouté dans les variables d'environnement sur Koyeb
 const TOKEN = process.env.BOT_TOKEN;
-
-// ID du canal où poster les codes
 const CHANNEL_ID = "1463623618931068949";
-
-// Source automatique des codes
 const CODES_URL = "https://wos-codes-api.vercel.app/codes.json";
 
-/ 🔵 🔵 🔵 1) ICI : tu colles la liste des joueurs à notifier
-// ---------------------------------------------------------
+// Liste des joueurs
 const SUBSCRIBERS = [
-  "249866798",//Touill
-  "248801505",//Blondiye
+  "249866798",// Touill
+  "248801505",// Blondiye
   "259496198",// LaNormande
   "333162702"// Moi
 ];
-// ---------------------------------------------------------
 
 let lastPosted = new Set();
 
-// 🔵 🔵 🔵 2) ICI : tu colles la fonction complète checkCodes()
-// ---------------------------------------------------------
 async function checkCodes() {
   let codes = [];
 
