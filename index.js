@@ -22,15 +22,22 @@ let lastPosted = new Set();
 
 async function checkCodes() {
   try {
+    let codes = [];
+
+try {
     const res = await axios.get(CODES_URL);
-    const codes = res.data.codes || [];
+    codes = res.data;
+    console.log("Codes récupérés :", codes);
+} catch (err) {
+    console.error("Erreur récupération codes :", err.message);
 
-    const channel = await client.channels.fetch(CHANNEL_ID);
+    if (err.response && err.response.status === 404) {
+        console.log("Aucun code disponible pour le moment.");
+        return;
+    }
 
-    for (const code of codes) {
-      if (!lastPosted.has(code)) {
-        await channel.send(`🎁 Nouveau code cadeau détecté : **${code}**`);
-        lastPosted.add(code);
+    return;
+}
       }
     }
   } catch (err) {
