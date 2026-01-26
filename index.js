@@ -22,6 +22,9 @@ const SUBSCRIBERS = [
 ];
 
 let lastPosted = new Set();
+// Historique des codes envoyés par joueur
+let sentCodesByUser = {};
+
 
 async function checkCodes() {
   let codes = [];
@@ -45,21 +48,32 @@ async function checkCodes() {
 
   for (const code of codes) {
     if (lastPosted.has(code.code)) continue;
+    
+    for (const userId of SUBSCRIBERS) {
+   if (!sentCodesByUser[userId]) {
+    sentCodesByUser[userId] = new Set();
+  }
+
+  if (sentCodesByUser[userId].has(code.code)) continue;
+
+  try {
+    const user = await client.users.fetch(userId);
+    await user.send(
+      `🎁 **Nouveau code Whiteout Survival !**\n\n` +
+      `🔑 Code : **${code.code}**\n` +
+      `⚡ Activation rapide : https://whiteout-survival.farlightgames.com/redemption?code=${code.code}\n\n` +
+      `⏳ Expire : ${code.expires || "Non précisé"}`
+    );
+
+    sentCodesByUser[userId].add(code.code);
+
+  } catch (err) {
+    console.error(`Impossible d'envoyer un message à ${userId} :`, err.message);
+  }
+}
 
     // 🔵 🔵 🔵 3) ICI : envoi automatique aux joueurs enregistrés
-    for (const userId of SUBSCRIBERS) {
-      try {
-        const user = await client.users.fetch(userId);
-        await user.send(
-          `🎁 **Nouveau code Whiteout Survival !**\n\n` +
-          `🔑 Code : **${code.code}**\n` +
-          `⚡ Activation rapide : https://whiteout-survival.farlightgames.com/redemption?code=${code.code}\n\n` +
-          `⏳ Expire : ${code.expires || "Non précisé"}`
-        );
-      } catch (err) {
-        console.error(`Impossible d'envoyer un message à ${userId} :`, err.message);
-      }
-    }
+    
 
     lastPosted.add(code.code);
   }
