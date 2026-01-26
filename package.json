@@ -11,3 +11,8 @@
     "discord.js": "^14.13.0"
   }
 }
+"engines": {
+  "node": "18.x"
+}"engines": {
+  "node": "18.x"
+}
