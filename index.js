@@ -18,7 +18,8 @@ const SUBSCRIBERS = [
   "249866798",// Touill
   "248801505",// Blondiye
   "259496198",// LaNormande
-  "333162702"// Moi
+  "333162702",// Moi
+  "425992001"// Ma ferme
 ];
 
 let lastPosted = new Set();
