@@ -21,9 +21,10 @@ const CODES_URL = "https://wos-codes-api.vercel.app/codes.json";
 / 🔵 🔵 🔵 1) ICI : tu colles la liste des joueurs à notifier
 // ---------------------------------------------------------
 const SUBSCRIBERS = [
-  "249866798",
-  "ID_JOUEUR_2",
-  "ID_JOUEUR_3"
+  "249866798",//Touill
+  "248801505",//Blondiye
+  "259496198",// LaNormande
+  "333162702"// Moi
 ];
 // ---------------------------------------------------------
 
