@@ -18,7 +18,61 @@ const CHANNEL_ID = "1463623618931068949";
 // Source automatique des codes
 const CODES_URL = "https://wos-codes-api.vercel.app/codes.json";
 
+/ 🔵 🔵 🔵 1) ICI : tu colles la liste des joueurs à notifier
+// ---------------------------------------------------------
+const SUBSCRIBERS = [
+  "ID_JOUEUR_1",
+  "ID_JOUEUR_2",
+  "ID_JOUEUR_3"
+];
+// ---------------------------------------------------------
+
 let lastPosted = new Set();
+
+// 🔵 🔵 🔵 2) ICI : tu colles la fonction complète checkCodes()
+// ---------------------------------------------------------
+async function checkCodes() {
+  let codes = [];
+
+  try {
+    const res = await axios.get(CODES_URL);
+    codes = res.data;
+    console.log("Codes récupérés :", codes);
+  } catch (err) {
+    console.error("Erreur récupération codes :", err.message);
+
+    if (err.response && err.response.status === 404) {
+      console.log("Aucun code disponible pour le moment.");
+      return;
+    }
+
+    return;
+  }
+
+  if (!codes || codes.length === 0) return;
+
+  for (const code of codes) {
+    if (lastPosted.has(code.code)) continue;
+
+    // 🔵 🔵 🔵 3) ICI : envoi automatique aux joueurs enregistrés
+    for (const userId of SUBSCRIBERS) {
+      try {
+        const user = await client.users.fetch(userId);
+        await user.send(
+          `🎁 **Nouveau code Whiteout Survival !**\n\n` +
+          `🔑 Code : **${code.code}**\n` +
+          `⚡ Activation rapide : https://whiteout-survival.farlightgames.com/redemption?code=${code.code}\n\n` +
+          `⏳ Expire : ${code.expires || "Non précisé"}`
+        );
+      } catch (err) {
+        console.error(`Impossible d'envoyer un message à ${userId} :`, err.message);
+      }
+    }
+
+    lastPosted.add(code.code);
+  }
+}
+// ---------------------------------------------------------
 
 async function checkCodes() {
   let codes = [];
