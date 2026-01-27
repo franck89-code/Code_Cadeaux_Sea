@@ -28,10 +28,13 @@ const CODES_URL = "https://wos-codes-api.vercel.app/codes.json";
 // Liste des joueurs
 const SUBSCRIBERS = [
   "249866798",// Touill
-  "248801505",// Blondiye
+  "248801505",// Blondyie
   "259496198",// LaNormande
   "333162702",// Moi
-  "425992001"// Ma ferme
+  "425992001",// Ma ferme
+  "250210523",// Sez
+  "251029505",//Jenny
+  "247556447"//Lawzzy
 ];
 
 let lastPosted = new Set();
