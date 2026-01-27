@@ -34,7 +34,8 @@ const SUBSCRIBERS = [
   "425992001",// Ma ferme
   "250210523",// Sez
   "251029505",//Jenny
-  "247556447"//Lawzzy
+  "247556447",//Lawzzy
+  "248244287"//Nez qui coule
 ];
 
 let lastPosted = new Set();
