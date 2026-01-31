@@ -39,6 +39,7 @@ const SUBSCRIBERS = [
   "251471924",//Klebledur
   "248031220",//KnightOnline
   "245650686"//Lord Long Dong
+   
 ];
 
 let lastPosted = new Set();
