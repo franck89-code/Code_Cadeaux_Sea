@@ -25,7 +25,7 @@ const TOKEN = process.env.BOT_TOKEN;
 const CHANNEL_ID = "1463623618931068949";
 const CODES_URL = "https://wos-codes-api.vercel.app/codes.json";
 
-// Liste des joueurs
+// Liste des joueurs SEA
 const SUBSCRIBERS = [
   "249866798",// Touill
   "248801505",// Blondyie
@@ -35,7 +35,10 @@ const SUBSCRIBERS = [
   "250210523",// Sez
   "251029505",//Jenny
   "247556447",//Lawzzy
-  "248244287"//Nez qui coule
+  "248244287",//Nez qui coule
+  "251471924",//Klebledur
+  "248031220",//KnightOnline
+  "245650686"//Lord Long Dong
 ];
 
 let lastPosted = new Set();
